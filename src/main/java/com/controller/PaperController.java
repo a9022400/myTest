@@ -27,9 +27,11 @@ public class PaperController {
         return mv;
     }
 
-    @RequestMapping("toAddPaper")
-    public String toAddPaper() {
-        return "addPaper";
+    @RequestMapping("/toAddPaper")
+    public ModelAndView toAddPaper() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("addPaper");
+        return mv;
     }
 
     @RequestMapping("/addPaper")
@@ -44,7 +46,7 @@ public class PaperController {
         return "redirect:/paper/allPaper";
     }
 
-    @RequestMapping("toUpdatePaper")
+    @RequestMapping("/toUpdatePaper")
     public String toUpdatePaper(Model model, Long id) {
         model.addAttribute("paper", paperService.queryById(id));
         return "updatePaper";
