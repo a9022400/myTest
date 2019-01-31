@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.pojo.Paper;
+import com.entity.Paper;
 
 import java.util.List;
 

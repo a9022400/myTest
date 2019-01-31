@@ -1,4 +1,4 @@
-package com.pojo;
+package com.entity;
 
 public class Paper {
     private long paperId;

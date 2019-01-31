@@ -1,6 +1,6 @@
 package com.service.impl;
 
-import com.pojo.Paper;
+import com.entity.Paper;
 import com.dao.PaperDao;
 import com.service.PaperService;
 

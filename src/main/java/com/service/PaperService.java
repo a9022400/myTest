@@ -1,6 +1,6 @@
 package com.service;
 
-import com.pojo.Paper;
+import com.entity.Paper;
 
 import java.util.List;
 
