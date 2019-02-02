@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入 Bootstrap -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <div class="container">
@@ -63,7 +64,7 @@
                         <td>${user.text}</td>
                         <td>
                             <a href="${path}/user/toUpdateUser?id=${user.id}">更改</a> |
-                            <a href="<%=appPath%>/user/del/${user.id}">删除</a>
+                            <label onclick="del(${user.id})">删除</label>
                         </td>
                     </tr>
                 </c:forEach>
@@ -72,3 +73,31 @@
         </div>
     </div>
 </div>
+<script>
+    function del(id) {
+        let r=confirm("确认删除吗？");
+        if(r==true){
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "<%=appPath%>/user/del/"+id,//url
+                data:{},
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+                    if (result.flag == "SUCCESS") {
+                        alert("更新成功！");
+                        window.location.href="${path}/user/allUser";
+                    }else{
+                        alert("更新失败！； ");
+                    }
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
+        }else if(r==false){
+
+        }
+    }
+</script>

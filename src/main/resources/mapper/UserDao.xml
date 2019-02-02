@@ -108,8 +108,8 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into test.user(name, oldName, sex, birth, fatherId, motherId, img, text, temp1, temp2, temp3, temp4)
-        values (#{name}, #{oldname}, #{sex}, #{birth}, #{fatherid}, #{motherid}, #{img}, #{text}, #{temp1}, #{temp2}, #{temp3}, #{temp4})
+        insert into test.user(id,name, oldName, sex, birth, fatherId, motherId, img, text, temp1, temp2, temp3, temp4)
+        values (null,#{name}, #{oldname}, #{sex}, #{birth}, #{fatherid}, #{motherid}, #{img}, #{text}, #{temp1}, #{temp2}, #{temp3}, #{temp4})
     </insert>
 
     <!--通过主键修改数据-->

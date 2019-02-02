@@ -48,7 +48,7 @@ public class UserController {
     @RequestMapping("/allUser")
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView();
-        List<User> list = userService.queryAllByLimit(0,10);
+        List<User> list = userService.queryAllByLimit(0,100);
         mv.addObject("list", list);
         mv.setViewName("allUser");
         return mv;
@@ -62,15 +62,33 @@ public class UserController {
     }
 
     @RequestMapping("/addUser")
-    public String addUser(User user) {
-        userService.insert(user);
-        return "redirect:/user/allUser";
+    @ResponseBody
+    public Map addUser(User user) {
+        HashMap map=new HashMap();
+        try{
+            userService.insert(user);
+        }catch (Exception e){
+            e.getStackTrace();
+            map.put("flag","ERROR");
+            return map;
+        }
+        map.put("flag","SUCCESS");
+        return map;
     }
 
     @RequestMapping("/del/{id}")
-    public String deleteUser(@PathVariable("id") Integer id) {
-        userService.deleteById(id);
-        return "redirect:/user/allUser";
+    @ResponseBody
+    public Map deleteUser(@PathVariable("id") Integer id) {
+        HashMap map=new HashMap();
+        try{
+            userService.deleteById(id);
+        }catch (Exception e){
+            e.getStackTrace();
+            map.put("flag","ERROR");
+            return map;
+        }
+        map.put("flag","SUCCESS");
+        return map;
     }
 
     @RequestMapping("/toUpdateUser")

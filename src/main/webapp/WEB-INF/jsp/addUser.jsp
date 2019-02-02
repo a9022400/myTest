@@ -50,14 +50,15 @@
             </div>
         </div>
     </div>
-    <form action="" name="userForm">
+    <form id="userForm">
         用户名字：<input type="text" name="name"/><br>
         小名：<input type="text" name="oldname"/><br>
-        性别：男<input type="radio" name="sex" id="男"/>&nbsp;女<input type="radio" name="sex" id="女"/><br>
+        性别：<span onclick="radio(this)">男<input type="radio" class="sex" id="man" value="男"/></span>
+        &nbsp;<span onclick="radio(this)">女<input type="radio" class="sex" id="woman" value="女"/></span><br>
         生日：<input type="date" name="birth"/><br>
         父亲姓名：<input type="text" name="fatherName" id="fatherName"  onblur="Fcheck()"/>
                  <input type="hidden" name="fatherId" id="fatherId"/>
-                 <ul  id="searchResult" ></ul>
+                 <ul  id="searchResult" style="display: none"></ul>
                  <input type="button" value="校验是否存在重名"><br>
         母亲姓名：<input type="text" name="motherid"/><br>
         备注：<input type="text" name="text"/><br>
@@ -65,18 +66,36 @@
     </form>
 
     <script type="text/javascript">
-        window.onload=function () {
-
-        };
+        function radio(dom) {
+            $("#man").prop('checked',false);
+            $("#woman").prop('checked',false);
+            $(dom).children(".sex").prop('checked',true);
+        }
         function addUser() {
-            var form = document.forms[0];
-            form.action = "<%=basePath %>user/addUser";
-            form.method = "post";
-            form.submit();
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "<%=basePath %>user/addUser" ,//url
+                data: $('#userForm').serialize(),
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+                    if (result.flag == "SUCCESS") {
+                        alert("更新成功！");
+                        window.location.href="<%=basePath %>user/allUser";
+                    }else{
+                        alert("更新失败！； ");
+                    }
+                },
+                error : function() {
+                    alert("异常！");
+                }
+            });
         }
         function Fcheck() {
             var name=$('#fatherName').val();
             if(name==null || name==""){
+                $('#searchResult').hide();
                 return;
             }
             $.ajax({
@@ -137,7 +156,7 @@
                     $(this).addClass('unselect')
                 }
             );
-            $(".beixuan").onclick(function () {
+            $(".beixuan").click(function () {
 
             })
         }

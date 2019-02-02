@@ -39,7 +39,8 @@
         <input type="hidden" name="id" value="${user.id}"/>
         用户名字：<input type="text" name="name" value="${user.name}"/><br>
         用户小名：<input type="text" name="oldname" value="${user.oldname}"/><br>
-        用户性别：<input type="text" name="sex" value="${user.sex}"/><br>
+        用户性别：<span onclick="radio(this)">男<input type="radio" class="sex" id="man" value="男"/></span>
+        &nbsp;<span onclick="radio(this)">女<input type="radio" class="sex" id="woman" value="女"/></span><br>
         用户生日：<input type="date" name="birth" value="${user.birth}"/><br>
         用户父亲：<input type="text" name="fatherid" value="${user.fatherid}"/><br>
         用户母亲：<input type="text" name="motherid" value="${user.motherid}"/><br>
@@ -48,6 +49,19 @@
     </form>
 
     <script type="text/javascript">
+        window.onload=function () {
+            var sex="${user.sex}";
+            if(sex=="男"){
+                $("#man").prop('checked',true);
+            }else if(sex=="女"){
+                $("#woman").prop('checked',true);
+            }
+        };
+        function radio(dom) {
+            $("#man").prop('checked',false);
+            $("#woman").prop('checked',false);
+            $(dom).children(".sex").prop('checked',true);
+        }
         function updateUser() {
             $.ajax({
                 //几个参数需要注意一下
@@ -59,6 +73,7 @@
                     console.log(result);//打印服务端返回的数据(调试用)
                     if (result.flag == "SUCCESS") {
                         alert("更新成功！");
+                        window.location.href="<%=basePath %>user/allUser";
                     }else{
                         alert("更新失败！； ");
                     }
