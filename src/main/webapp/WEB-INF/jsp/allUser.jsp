@@ -86,10 +86,10 @@
                 success: function (result) {
                     console.log(result);//打印服务端返回的数据(调试用)
                     if (result.flag == "SUCCESS") {
-                        alert("更新成功！");
+                        alert("新用户创建成功！");
                         window.location.href="${path}/user/allUser";
                     }else{
-                        alert("更新失败！； ");
+                        alert("新用户创建失败！； ");
                     }
                 },
                 error : function() {

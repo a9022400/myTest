@@ -39,8 +39,14 @@
         <input type="hidden" name="id" value="${user.id}"/>
         用户名字：<input type="text" name="name" value="${user.name}"/><br>
         用户小名：<input type="text" name="oldname" value="${user.oldname}"/><br>
-        用户性别：<span onclick="radio(this)">男<input type="radio" class="sex" id="man" value="男"/></span>
-        &nbsp;<span onclick="radio(this)">女<input type="radio" class="sex" id="woman" value="女"/></span><br>
+        用户性别：<span onclick="radio(this)">男
+                    <input type="radio" class="sex" id="man" value="男"/>
+                </span>
+                &nbsp;
+                <input type="hidden" name="sex" id="sex" value=""/>
+                <span onclick="radio(this)">女
+                    <input type="radio" class="sex" id="woman" value="女"/>
+                </span><br>
         用户生日：<input type="date" name="birth" value="${user.birth}"/><br>
         用户父亲：<input type="text" name="fatherid" value="${user.fatherid}"/><br>
         用户母亲：<input type="text" name="motherid" value="${user.motherid}"/><br>
@@ -52,15 +58,20 @@
         window.onload=function () {
             var sex="${user.sex}";
             if(sex=="男"){
+                console.log("男");
                 $("#man").prop('checked',true);
+                $("#sex").val('男');
             }else if(sex=="女"){
+                console.log("女");
                 $("#woman").prop('checked',true);
+                $("#sex").val('女');
             }
         };
         function radio(dom) {
             $("#man").prop('checked',false);
             $("#woman").prop('checked',false);
             $(dom).children(".sex").prop('checked',true);
+            $("#sex").val($(dom).children(".sex").val());
         }
         function updateUser() {
             $.ajax({

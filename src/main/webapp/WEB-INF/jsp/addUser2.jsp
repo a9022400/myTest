@@ -56,10 +56,8 @@
         性别：<span onclick="radio(this)">男<input type="radio" class="sex" id="man" value="男"/></span>
         &nbsp;<span onclick="radio(this)">女<input type="radio" class="sex" id="woman" value="女"/></span><br>
         生日：<input type="date" name="birth"/><br>
-        父亲姓名：<input type="text" name="fatherName" id="fatherName"/>
-                 <input type="hidden" name="fatherId" id="fatherId"/>
-                 <ul  id="searchResult" style="display: none"></ul>
-                 <input type="button" value="校验是否存在重名"><br>
+        父亲姓名：<input id="fatherName" name="fatherName">
+                 <input type="hidden" name="fatherId" id="fatherId"/><br>
         母亲姓名：<input type="text" name="motherid"/><br>
         备注：<input type="text" name="text"/><br>
         <input type="button" value="添加" onclick="addUser()">
@@ -145,33 +143,6 @@
                     alert("异常！");
                 }
             });
-        }
-        function nameByMouseHover() {
-            $(".beixuan").hover(
-                function(){
-                    $(this).removeClass('unselect');
-                    $(this).addClass('select')
-                },function(){
-                    $(this).removeClass('select');
-                    $(this).addClass('unselect')
-                }
-            );
-            $(".beixuan").click(function () {
-
-            })
-        }
-
-        window.onload=function(){
-            $("#fatherName").off().on({
-                compositionstart:function(){
-                    //$("#result").text("中文输入：开始")
-                    $('#searchResult').hide();
-                },
-                compositionend:function(){
-                    //$("#result").text("中文输入：结束")
-                    Fcheck();
-                }
-            })
         }
     </script>
 </div>

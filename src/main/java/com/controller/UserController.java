@@ -61,6 +61,13 @@ public class UserController {
         return mv;
     }
 
+    @RequestMapping("/toAddUser2")
+    public ModelAndView toAddUser2() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("addUser2");
+        return mv;
+    }
+
     @RequestMapping("/addUser")
     @ResponseBody
     public Map addUser(User user) {
