@@ -34,6 +34,7 @@
     <div class="row">
         <div class="col-md-4 column">
             <a class="btn btn-primary" href="${path}/user/toAddUser">新增</a>
+            <a class="btn btn-primary" href="${path}/user/toAddUser2">新增</a>
         </div>
     </div>
     <div class="row clearfix">

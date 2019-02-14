@@ -139,6 +139,17 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.2</version>
         </dependency>
+        <!-- jquery
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>jquery</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>autocomplete.js</artifactId>
+            <version>0.30.0</version>
+        </dependency> -->
     </dependencies>
     <build>
         <finalName>first</finalName>

@@ -17,9 +17,10 @@
 <head>
     <title>新增论文</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 引入 Bootstrap -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- JS -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%=basePath %>css/jquery-ui.min.css">
     <style>
         .select{
             background-color: cornflowerblue;
@@ -30,16 +31,15 @@
     </style>
 </head>
 <body>
+
+<div class="ui-widget">
+    <form id="userForm">
+        <label>父亲姓名：</label>
+        <input type="text" name="fatherName" id="fatherName" >
+        <input type="hidden" name="fatherId" id="fatherId"/><br>
+    </form>
+</div>
 <div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="page-header">
-                <h1>
-                    基于SSM框架的管理系统：简单实现增、删、改、查。
-                </h1>
-            </div>
-        </div>
-    </div>
 
     <div class="row clearfix">
         <div class="col-md-12 column">
@@ -50,46 +50,29 @@
             </div>
         </div>
     </div>
-    <form id="userForm">
-        用户名字：<input type="text" name="name"/><br>
-        小名：<input type="text" name="oldname"/><br>
-        性别：<span onclick="radio(this)">男<input type="radio" class="sex" id="man" value="男"/></span>
-        &nbsp;<span onclick="radio(this)">女<input type="radio" class="sex" id="woman" value="女"/></span><br>
-        生日：<input type="date" name="birth"/><br>
-        父亲姓名：<input id="fatherName" name="fatherName">
-                 <input type="hidden" name="fatherId" id="fatherId"/><br>
-        母亲姓名：<input type="text" name="motherid"/><br>
-        备注：<input type="text" name="text"/><br>
-        <input type="button" value="添加" onclick="addUser()">
-    </form>
 
+    <!--
+    -->
     <script type="text/javascript">
-        function radio(dom) {
-            $("#man").prop('checked',false);
-            $("#woman").prop('checked',false);
-            $(dom).children(".sex").prop('checked',true);
-        }
-        function addUser() {
-            $.ajax({
-                //几个参数需要注意一下
-                type: "POST",//方法类型
-                dataType: "json",//预期服务器返回的数据类型
-                url: "<%=basePath %>user/addUser" ,//url
-                data: $('#userForm').serialize(),
-                success: function (result) {
-                    console.log(result);//打印服务端返回的数据(调试用)
-                    if (result.flag == "SUCCESS") {
-                        alert("更新成功！");
-                        window.location.href="<%=basePath %>user/allUser";
-                    }else{
-                        alert("更新失败！； ");
-                    }
-                },
-                error : function() {
-                    alert("异常！");
+        window.onload=function(){
+        };
+        $(function() {
+            var data  = [
+                { label: "孙大大,编号：1", value: "1" },
+                { label: "孙爸爸,编号：2", value: "2" },
+                { label: "孙妈妈,编号：3", value: "3" },
+                { label: "孙爷爷,编号：4", value: "4" },
+                { label: "孙奶奶,编号：5", value: "5" }
+            ];
+            $( "#fatherName" ).autocomplete({
+                source: data,
+                select: function( event, ui ) {
+                    $("#fatherId").val(ui.item.value);
+                    $("#fatherName").val(ui.item.label);
+                    console.log(ui);
                 }
             });
-        }
+        });
         function Fcheck() {
             var name=$('#fatherName').val();
             if(name==null || name==""){
@@ -104,40 +87,9 @@
                 data: {"name":name},
                 success: function (data) {
                     console.log(data);//打印服务端返回的数据(调试用)
-                    let searchResult;
-                    searchResult = $('#searchResult');
-                    if (data.list.length > 0) {
-                        //将返回结果到ul标签下的html下面数据清空
-                        searchResult.html("");
-                        searchResult.append("<li style='list-style:none'>"+"编号"+"&nbsp;&nbsp;&nbsp;"+"姓名"+"</li>");
-                        //循环遍历返回回来的数据
-                        $.each(data.list, function(index, user) {
-                            //将遍历回来的数据追加到ul标签下
-                            //console.log(user);
-                            let str="";
-                            let func="";
-                            $.each(user, function(id, name) {
-                                //console.log(id);
-                                //console.log(name);
-                                //将遍历回来的数据追加到ul标签下
-                                if(id=='id')
-                                    //func="\"function(this){$(this).removeClass('unselect');$(this).addClass('select')},function(this){$(this).removeClass('select');$(this).addClass('unselect')}\"";
-                                    str="<li style='list-style:none' class='beixuan' >" +name;
-                                if(id=='name')
-                                    str=str+"&nbsp;&nbsp;&nbsp;"+name+"</li>";
-                            });
-                            console.log(str);
-                            searchResult.append(str);
-                        });
-                        //遍历完成后，将数据显示出来
-                        searchResult.show();
-                        nameByMouseHover();
-                    } else {
-                        //如果数据为空，也将ul标签隐藏
-                        searchResult.hide();
-                        alert("暂无此用户");
-
-                    }
+                    $( "#fatherName" ).autocomplete({
+                        source: availableTags
+                    });
                 },
                 error : function() {
                     alert("异常！");
