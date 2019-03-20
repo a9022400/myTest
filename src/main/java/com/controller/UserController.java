@@ -2,7 +2,6 @@ package com.controller;
 
 import com.entity.User;
 import com.service.UserService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -51,6 +50,33 @@ public class UserController {
         List<User> list = userService.queryAllByLimit(0,100);
         mv.addObject("list", list);
         mv.setViewName("allUser");
+        return mv;
+    }
+
+    @RequestMapping("/check")
+    public ModelAndView check() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("common/index");
+        return mv;
+    }
+
+    @RequestMapping("/checktemp")
+    public ModelAndView checktemp(@RequestParam String action) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("check/"+action);
+        return mv;
+    }
+    @RequestMapping("/checknews")
+    public ModelAndView checknews() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("check/news_manage");
+        return mv;
+    }
+
+    @RequestMapping("/checkmain")
+    public ModelAndView checkmain() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("check/home");
         return mv;
     }
 
