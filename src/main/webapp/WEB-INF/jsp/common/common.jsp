@@ -65,6 +65,9 @@
                 window.open('${path}/user/checktemp'+'?title='+$(this).attr("title"));
             })*/
         });
+        function log(text) {
+            console.log(text);
+        }
     </script>
     <!-- 页面样式 -->
     <style>
@@ -208,6 +211,7 @@
             color: #eea236;
             margin-right: 20px;
             line-height: 100%;
+            cursor: pointer;
         }
         .row{
             margin: 0;
@@ -216,6 +220,7 @@
             padding-left: 0;
             padding-right: 0;
             margin-top: 10px;
+            padding-top: 10px;
         }
     </style>
 </head>
@@ -229,7 +234,7 @@
                 </div>
                 <div class="col-md-6 col-md-offset-3 column top_top_login">
                     <div class="pull-right">
-                        <span class="rsgl glyphicon glyphicon-user">人事管理</span>
+                        <span class="rsgl glyphicon glyphicon-user" onclick="x('rsgl')">人事管理</span>
                         <label class="top_top_label accountLable">用户名：</label>
                         <label class="top_top_label accountName">user</label>
                         <input class="form-control userinput" type="text" style="display: none">

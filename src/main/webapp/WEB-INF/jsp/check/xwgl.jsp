@@ -17,7 +17,7 @@
 %>
 <html>
 <head>
-    <title>考核网首页</title>
+    <title>新闻管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="pageName" content="xwgl"/>
     <!-- 先引入 jquery -->
@@ -275,7 +275,6 @@
         margin-top: 10px;
         border: 1px solid #cccccc;
         height: 76%;
-        padding: 0px;
     }
     .news_add{
         margin-right: 15px;
